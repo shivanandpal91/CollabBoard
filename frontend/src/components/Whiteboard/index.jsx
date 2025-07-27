@@ -79,7 +79,7 @@ const WhiteBoard = ({
               element.height,
               {
                 stroke: element.stroke,
-                strokeWidth: 5,
+                strokeWidth: 1,
                 roughness: 0,
               }
             )
@@ -93,7 +93,7 @@ const WhiteBoard = ({
               element.height,
               {
                 stroke: element.stroke,
-                strokeWidth: 5,
+                strokeWidth: 1,
                 roughness: 0,
               }
             )
@@ -101,7 +101,7 @@ const WhiteBoard = ({
         } else if (element.type === "pencil") {
           roughCanvas.linearPath(element.path, {
             stroke: element.stroke,
-            strokeWidth: 5,
+            strokeWidth: 1,
             roughness: 0,
           });
         }

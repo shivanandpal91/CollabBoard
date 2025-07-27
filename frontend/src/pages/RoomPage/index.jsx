@@ -25,7 +25,6 @@ const RoomPage = ({
   const [elements, setElements] = useState([]);
   const [history, setHistory] = useState([]);
   const [openedUserTab, setOpenedUserTab] = useState(false);
-  const [openedChatTab, setOpenedChatTab] = useState(false);
   const [stream, setStream] = useState(null);
 
   const handleClearCanvas = () => {
@@ -112,40 +111,30 @@ const RoomPage = ({
 
   return (
     <div className="row">
-      <button
-        type="button"
-        className="btn btn-dark"
-        style={{
-          display: "block",
-          position: "absolute",
-          top: "5%",
-          left: "3%",
-          height: "40px",
-          width: "100px",
-        }}
-        onClick={() => setOpenedUserTab(true)}
-      >
-        Users
-      </button>
-      <button
-        type="button"
-        className="btn btn-primary"
-        style={{
-          display: "block",
-          position: "absolute",
-          top: "5%",
-          left: "10%",
-          height: "40px",
-          width: "100px",
-        }}
-        onClick={() => setOpenedChatTab(true)}
-      >
-        Chats
-      </button>
+      <div>
+        <button
+          type="button"
+          className="btn btn-dark"
+          style={{
+            display: "block",
+            position: "absolute",
+            top: "5%",
+            left: "3%",
+            height: "40px",
+            width: "100px",
+          }}
+          onClick={() => setOpenedUserTab(true)}
+        >
+          Users
+        </button>
+      <h2  className="text-left py-4"><span className="text-primary">Online Users: {users.length}</span></h2>
+    </div>
+      
+      <Chat socket={socket}/>
       {openedUserTab && (
         <div
-          className="position-fixed top-0 h-100 text-white bg-dark"
-          style={{ width: "250px", left: "0%" }}
+          className="position-fixed top-0 h-100 text-white bg-secondary"
+          style={{ width: "250px", left: "0%", zIndex: 1020}}
         >
           <button
             type="button"
@@ -163,12 +152,9 @@ const RoomPage = ({
           </div>
         </div>
       )}
-      {openedChatTab && (
-        <Chat setOpenedChatTab={setOpenedChatTab} socket={socket} />
-      )}
-      <h1 className="text-center py-4">
+      <h1 className="text-center py-2">
         CollabBoard{" "}
-        <span className="text-primary">[Online users : {users.length}]</span>
+        {/* <span className="text-primary">[Online Users: {users.length}]</span> */}
       </h1>
       {user?.presenter && (
         <div className="col-md-10 mx-auto px-5 mb-3 d-flex align-items-center jusitfy-content-center">
@@ -245,7 +231,7 @@ const RoomPage = ({
           </div>
         </div>
       )}
-
+      
       <div className="col-md-10 mx-auto mt-4 canvas-box">
         <WhiteBoard
           canvasRef={canvasRef}
