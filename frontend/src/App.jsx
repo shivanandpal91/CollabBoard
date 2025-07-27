@@ -47,12 +47,37 @@ const App = () => {
     console.log(users);
     p.innerText = name;
     div.append(p);
+    // call.on("stream", (userVideoStream) => {
+    //   addVideoStream(div, video, userVideoStream);
+    // });
     call.on("stream", (userVideoStream) => {
-      addVideoStream(div, video, userVideoStream);
-    });
-    call.on("close", () => {
-      video.remove();
-    });
+      // Save the stream to the div for cleanup
+      video.srcObject = userVideoStream;
+      video.addEventListener("loadedmetadata", () => {
+        video.play();
+      });
+
+      div.append(video);
+      videoGrid.current.append(div);
+
+      // Attach stream for cleanup later
+      div.userVideoStream = userVideoStream;
+      });
+
+
+      
+      // ✅ Proper cleanup when call is closed
+      call.on("close", () => {
+      const videoDiv = document.getElementById(userId);
+      if (videoDiv) {
+        // Stop video tracks
+        const stream = videoDiv.userVideoStream;
+        if (stream) {
+          stream.getTracks().forEach(track => track.stop());
+        }
+        videoDiv.remove();
+      }
+      });
 
     setPeers((prevPeers) => {
       return { ...prevPeers, [userId]: call };
@@ -73,11 +98,32 @@ const App = () => {
       setUsers(data);
     });
 
+    // socket.on("userLeftMessageBroadcasted", (data) => {
+    //   console.log(`${data.name} ${data.userId} left the room`);
+    //   toast.info(`${data.name} left the room`);
+    //   if (peers[data.userId]) peers[data.userId].close();
+    // });
     socket.on("userLeftMessageBroadcasted", (data) => {
       console.log(`${data.name} ${data.userId} left the room`);
       toast.info(`${data.name} left the room`);
-      if (peers[data.userId]) peers[data.userId].close();
+
+      // Close peer connection if exists
+      if (peers[data.userId]) {
+        peers[data.userId].close();
+        delete peers[data.userId];
+      }
+
+      // Explicit DOM cleanup (in case call.on('close') missed it)
+      const videoDiv = document.getElementById(data.userId);
+      if (videoDiv) {
+        const stream = videoDiv.userVideoStream;
+        if (stream) {
+          stream.getTracks().forEach(track => track.stop());
+        }
+        videoDiv.remove();
+      }
     });
+
   }, []);
 
   const uuid = () => {
