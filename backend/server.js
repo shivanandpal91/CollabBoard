@@ -4,7 +4,7 @@ const app = express();
 const server = require("http").createServer(app);
 const { Server } = require("socket.io");
 
-const { addUser, getUser, removeUser } = require("./utils/users");
+const { addUser, getUser, removeUser, getUsersInRoom } = require("./utils/users");
 
 // const { PeerServer } = require("peer");
 
@@ -73,8 +73,11 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     const user = getUser(socket.id);
+    // console.log("dhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
     if (user) {
       removeUser(socket.id);
+      const users=getUsersInRoom(user.roomId);
+      socket.broadcast.to(roomIdGlobal).emit("allUsers", users);
       socket.broadcast.to(roomIdGlobal).emit("userLeftMessageBroadcasted", {
         name: user.name,
         userId: user.userId,
