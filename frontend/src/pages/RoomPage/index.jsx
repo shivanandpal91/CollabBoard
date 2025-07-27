@@ -167,8 +167,8 @@ const RoomPage = ({
         <Chat setOpenedChatTab={setOpenedChatTab} socket={socket} />
       )}
       <h1 className="text-center py-4">
-        White Board Sharing App{" "}
-        <span className="text-primary">[Users Online : {users.length}]</span>
+        CollabBoard{" "}
+        <span className="text-primary">[Online users : {users.length}]</span>
       </h1>
       {user?.presenter && (
         <div className="col-md-10 mx-auto px-5 mb-3 d-flex align-items-center jusitfy-content-center">

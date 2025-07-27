@@ -22,7 +22,7 @@ const io = new Server(server);
 // routes
 app.get("/", (req, res) => {
   res.send(
-    "This is mern realtime board sharing app official server by fullyworld web tutorials"
+    "This is mern realtime board sharing app"
   );
 });
 
