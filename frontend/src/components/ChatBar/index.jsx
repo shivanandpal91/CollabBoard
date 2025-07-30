@@ -86,11 +86,11 @@ const Chat = ({ socket, onClose, chat, setChat, isVisible }) => {
         <input
           type="text"
           className="form-control me-2"
-          placeholder="Type a message"
+          placeholder="Type message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           style={{
-            backgroundColor: "#2c2c2c",
+            backgroundColor: "#0fcedfff",
             color: "white",
             border: "none",
           }}

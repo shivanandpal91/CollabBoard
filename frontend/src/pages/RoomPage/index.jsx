@@ -122,17 +122,25 @@ const RoomPage = ({
       {/* <div style={{ height: "80px" }}></div> */}
       <div className="row">
         <div>
+
           <button
             type="button"
-            className="btn btn-success"
             style={{
-              display: "block",
               position: "absolute",
               top: "11%",
               left: "1%",
               height: "40px",
               width: "100px",
+              backgroundColor: "#10b981", // emerald-500
+              color: "#ffffff",
+              borderRadius: "8px",
+              fontWeight: "600",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              border: "none",
+              cursor: "pointer",
             }}
+            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#059669")} // emerald-600
+            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#10b981")}
             onClick={() => setOpenedUserTab(true)}
           >
             Users
@@ -141,26 +149,49 @@ const RoomPage = ({
           {!showChat && (
             <button
               type="button"
-              className="btn btn-success"
               style={{
-                display: "block",
                 position: "absolute",
                 top: "17%",
                 left: "1%",
                 height: "40px",
                 width: "100px",
+                backgroundColor: "#3b82f6", // blue-500
+                color: "#ffffff",
+                borderRadius: "8px",
+                fontWeight: "600",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                border: "none",
+                cursor: "pointer",
               }}
+              onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#2563eb")} // blue-600
+              onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#3b82f6")}
               onClick={() => setShowChat(true)}
             >
               Chat
             </button>
           )}
 
+
           <div
-            className="w-100 text-center py-4 mb-3"
+            className="w-100 text-center py-2 mb-3"
             style={{ overflowY: "auto" }}
           >
-            <h2 className="text-success">Online Users: {users.length}</h2>
+            <h2
+              style={{
+                fontSize: "1.75 rem",
+                fontWeight: "600",
+                color: "#1D4ED8",             // emerald-700
+                backgroundColor: "#ECFDF5",   // emerald-50
+                padding: "0.5rem 1rem",
+                borderRadius: "0.5rem",
+                display: "inline-block",
+                marginBottom: "1rem",
+                boxShadow: "0 1px 4px rgba(0,0,0,0.08)"
+              }}
+            >
+            Online Users: {users.length}
+          </h2>
+
           </div>
         </div>
 
@@ -196,7 +227,24 @@ const RoomPage = ({
           </div>
         )}
 
-        <h1 className="text-center py-2 text-success">CollabBoard</h1>
+       <h2
+        style={{
+          fontSize: "2rem", // increased size
+          fontWeight: "700",
+          textAlign: "center",
+          color: "#1E40AF", // blue-800
+          backgroundColor: "#D1FAE5", // green-100
+          padding: "0.75rem 1.5rem",
+          borderRadius: "0.75rem",
+          margin: "1.25rem auto",
+          width: "fit-content",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.1)"
+        }}
+      >
+        Real-time Shared Canvas
+      </h2>
+
+
 
         {user?.presenter && (
           <div className="col-md-10 mx-auto px-5 mb-3 d-flex align-items-center justify-content-center flex-wrap gap-3">
