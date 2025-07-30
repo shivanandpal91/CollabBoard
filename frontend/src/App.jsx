@@ -6,6 +6,9 @@ import io from "socket.io-client";
 import "./App.css";
 
 import Forms from "./components/Forms";
+import Footer from "./components/Footer/Footer.jsx";
+import FormHeader from "./components/Header/FormHeader";
+
 import RoomPage from "./pages/RoomPage";
 
 const server = "http://localhost:5000";
@@ -23,7 +26,7 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [peers, setPeers] = useState({});
   const [myPeer, setMyPeer] = useState(null);
-  const [openVideo, setOpenVideo] = useState(true);
+  const [openVideo, setOpenVideo] = useState(false);
 
   const videoGrid = useRef(null);
 
@@ -152,62 +155,69 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={
-            <Forms
-              uuid={uuid}
-              setMyPeer={setMyPeer}
-              socket={socket}
-              setUser={setUser}
-            />
-          }
+          element = {
+  <div className="d-flex flex-column h-100">
+    <FormHeader />
+    <Forms
+      uuid={uuid}
+      setMyPeer={setMyPeer}
+      socket={socket}
+      setUser={setUser}
+    />
+    <Footer />
+  </div>
+}
+
         />
         <Route
           path="/:roomId"
           element={
             <>
-              <button
-                onClick={() => setOpenVideo(!openVideo)}
-                style={{
-                  position: "absolute",
-                  top: "10px",
-                  right: "10px",
-                  zIndex: "100",
-                  backgroundColor: "white",
-                  border: "none",
-                  padding: "10px",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                }}
-              >
-                Open Video
-              </button>
-              <div
-                className="video-grid h-100 position-fixed top-0 "
-                style={{
-                  zIndex: 1000,
-                  right: openVideo ? "0" : "-100%",
-                }}
-                ref={videoGrid}
-              >
-                <button
-                  className="btn btn-light  "
-                  onClick={() => setOpenVideo(false)}
-                >
-                  Close
-                </button>
-              </div>
-              <RoomPage
-                connectToNewUser={connectToNewUser}
-                addVideoStream={addVideoStream}
-                videoGrid={videoGrid}
-                user={user}
-                myPeer={myPeer}
-                setPeers={setPeers}
-                socket={socket}
-                users={users}
-                setUsers={setUsers}
-              />
-            </>
+  <button
+    onClick={() => setOpenVideo(!openVideo)}
+    style={{
+      position: "absolute",
+      top: "60px", // moved downward
+      right: "10px",
+      zIndex: "100",
+      backgroundColor: "#1E865A",
+      border: "none",
+      padding: "10px",
+      borderRadius: "5px",
+      cursor: "pointer",
+    }}
+  >
+    Open Video
+  </button>
+  <div
+    className="video-grid h-100 position-fixed top-0"
+    style={{
+      zIndex: 1000,
+      right: openVideo ? "0" : "-100%",
+    }}
+    ref={videoGrid}
+  >
+    <button
+      className="btn btn-light"
+      onClick={() => setOpenVideo(false)}
+    >
+      Close
+    </button>
+  </div>
+  <RoomPage
+    connectToNewUser={connectToNewUser}
+    addVideoStream={addVideoStream}
+    videoGrid={videoGrid}
+    user={user}
+    myPeer={myPeer}
+    setPeers={setPeers}
+    socket={socket}
+    users={users}
+    setUsers={setUsers}
+  />
+  <Footer start />
+</>
+
           }
         />
       </Routes>

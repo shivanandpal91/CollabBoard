@@ -16,11 +16,14 @@ const WhiteBoard = ({
   const [img, setImg] = useState(null);
 
   useEffect(() => {
-    socket.on("whiteBoardDataResponse", (data) => {
-      setImg(data.imgURL);
-    });
-  }, []);
+    const handleWhiteboardData = (data) => {
+      if (data?.imgURL) {
+        setImg(data.imgURL);
+      }
+    };
 
+    socket.on("whiteBoardDataResponse", handleWhiteboardData);
+  }, []);
   if (!user?.presenter) {
     return (
       <div className="border border-dark border-3 h-100 w-100 overflow-hidden">
