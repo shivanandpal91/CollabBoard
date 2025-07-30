@@ -43,8 +43,10 @@ io.on("connection", (socket) => {
     });
     socket.emit("userIsJoined", { success: true, users });
     console.log({ name, userId });
+    // console.log(111);
     socket.broadcast.to(roomId).emit("allUsers", users);
     setTimeout(() => {
+      socket.emit("whiteBoardDataResponse", { imgURL: imgURLGlobal });
       socket.broadcast
         .to(roomId)
         .emit("userJoinedMessageBroadcasted", { name, userId, users });
