@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Peer from "peerjs";
 
 const CreateRoomForm = ({ uuid, socket, setUser, setMyPeer }) => {
@@ -10,8 +11,6 @@ const CreateRoomForm = ({ uuid, socket, setUser, setMyPeer }) => {
 
   const handleCreateRoom = (e) => {
     e.preventDefault();
-
-    // {name,roomId, userId, host, presenter}
 
     const myPeer = new Peer(undefined, {
       host: "/",
@@ -35,6 +34,7 @@ const CreateRoomForm = ({ uuid, socket, setUser, setMyPeer }) => {
       console.log(roomData);
       socket.emit("userJoined", roomData);
     });
+
     myPeer.on("error", (err) => {
       console.log("peer connection error", err);
       myPeer.reconnect();
@@ -50,28 +50,36 @@ const CreateRoomForm = ({ uuid, socket, setUser, setMyPeer }) => {
           placeholder="Enter your name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          style={{ borderColor: "#90ee90" }}
         />
       </div>
-      <div className="form-group border">
-        <div className="input-group d-flex align-items-center jusitfy-content-center">
+      <div className="form-group border" style={{ borderColor: "#90ee90" }}>
+        <div className="input-group d-flex align-items-center justify-content-center">
           <input
             type="text"
             value={roomId}
             className="form-control my-2 border-0"
             disabled
             placeholder="Generate room code"
+            style={{ backgroundColor: "#f4fff4", color: "#000" }}
           />
           <div className="input-group-append">
             <button
-              className="btn btn-primary btn-sm me-1"
+              className="btn btn-success btn-sm me-1"
               onClick={() => setRoomId(uuid())}
               type="button"
+              style={{ backgroundColor: "#90ee90", borderColor: "#90ee90", color: "#000" }}
             >
               generate
             </button>
             <button
-              className="btn btn-outline-danger btn-sm me-2"
+              className="btn btn-outline-success btn-sm me-2"
               type="button"
+              onClick={() => {
+                navigator.clipboard.writeText(roomId);
+                toast.success("Room ID copied!");
+              }}
+              style={{ borderColor: "#90ee90", color: "#228B22" }}
             >
               copy
             </button>
@@ -81,7 +89,8 @@ const CreateRoomForm = ({ uuid, socket, setUser, setMyPeer }) => {
       <button
         type="submit"
         onClick={handleCreateRoom}
-        className="mt-4 btn-primary btn-block form-control"
+        className="mt-4 btn btn-success btn-block form-control"
+        style={{ backgroundColor: "#47df47ff", borderColor: "#90ee90" }}
       >
         Generate Room
       </button>

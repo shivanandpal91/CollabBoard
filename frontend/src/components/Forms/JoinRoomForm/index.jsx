@@ -11,7 +11,6 @@ const JoinRoomForm = ({ uuid, socket, setUser, setMyPeer }) => {
   const handleRoomJoin = (e) => {
     e.preventDefault();
 
-    // open peer connccction with socket.io server
     const myPeer = new Peer(undefined, {
       host: "/",
       port: 5001,
@@ -33,6 +32,7 @@ const JoinRoomForm = ({ uuid, socket, setUser, setMyPeer }) => {
       navigate(`/${roomId}`);
       socket.emit("userJoined", roomData);
     });
+
     myPeer.on("error", (err) => {
       console.log("peer connection error", err);
       myPeer.reconnect();
@@ -48,6 +48,7 @@ const JoinRoomForm = ({ uuid, socket, setUser, setMyPeer }) => {
           placeholder="Enter your name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          style={{ borderColor: "#90ee90" }}
         />
       </div>
       <div className="form-group">
@@ -57,12 +58,14 @@ const JoinRoomForm = ({ uuid, socket, setUser, setMyPeer }) => {
           placeholder="Enter room code"
           value={roomId}
           onChange={(e) => setRoomId(e.target.value)}
+          style={{ borderColor: "#90ee90" }}
         />
       </div>
       <button
         type="submit"
         onClick={handleRoomJoin}
-        className="mt-4 btn-primary btn-block form-control"
+        className="mt-4 btn btn-success btn-block form-control"
+        style={{ backgroundColor: "#47df47ff", borderColor: "#90ee90" }}
       >
         Join Room
       </button>
