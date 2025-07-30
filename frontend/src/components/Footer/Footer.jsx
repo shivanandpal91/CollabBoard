@@ -52,12 +52,12 @@ const About = () => {
           <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
             <div>
               <h2 style={{ fontSize: "24px", fontWeight: "600", marginBottom: "10px" }}>📄 Project Overview</h2>
-              <p>Realtime collaborative drawing board powered by WebSockets and Canvas.</p>
+              <p>"Collaborative whiteboard with real-time drawing and built-in chat, enabling users to join or create rooms for interactive sessions."</p>
             </div>
             <div>
               <h2 style={{ fontSize: "24px", fontWeight: "600", marginBottom: "10px" }}>🧠 Tech Stack</h2>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", fontSize: "14px" }}>
-                {["React.js", "Tailwind CSS", "Socket.IO", "Node.js", "Express.js", "Canvas API", "UUID", "React Toastify"].map((tech, idx) => (
+                {["React.js", "Tailwind CSS", "Socket.IO", "Node.js", "Express.js", "Canvas API"].map((tech, idx) => (
                   <span key={idx} style={{ backgroundColor: "#374151", padding: "6px 14px", borderRadius: "9999px" }}>{tech}</span>
                 ))}
               </div>
@@ -67,7 +67,7 @@ const About = () => {
             <div>
               <h2 style={{ fontSize: "24px", fontWeight: "600", marginBottom: "10px" }}>👨‍💻 Developed By</h2>
               <p style={{ fontSize: "14px", color: "#d1d5db" }}><span style={{ color: "#34d399", fontWeight: "500" }}>Shivanand Pal</span> — CSE undergrad who likes building stuffs</p>
-              <p style={{ fontSize: "14px", color: "#d1d5db" }}><span style={{ color: "#34d399", fontWeight: "500" }}>[Shivanshu Gupta]</span> — CSE undergrad </p>
+              <p style={{ fontSize: "14px", color: "#d1d5db" }}><span style={{ color: "#34d399", fontWeight: "500" }}>Shivanshu Gupta</span> — CSE undergrad </p>
             </div>
             <div>
               <h2 style={{ fontSize: "24px", fontWeight: "600", marginBottom: "10px" }}>📫 Let's Connect</h2>
@@ -89,7 +89,7 @@ const About = () => {
           </div>
         </div>
         <p style={{ fontSize: "12px", color: "#9ca3af", textAlign: "center", marginTop: "40px" }}>
-          © {new Date().getFullYear()} <span style={{ color: "#fff", fontWeight: "500" }}>Shivanand Pal & [Your Teammate]</span>. All rights reserved.
+          © {new Date().getFullYear()} <span style={{ color: "#fff", fontWeight: "500" }}>Shivanshu Gupta & Shivanand Pal </span>. All rights reserved.
         </p>
       </div>
     </div>
