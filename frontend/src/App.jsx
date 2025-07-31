@@ -11,7 +11,7 @@ import FormHeader from "./components/Header/FormHeader";
 
 import RoomPage from "./pages/RoomPage";
 
-const server = "http://localhost:5000";
+const server = "https://collabboard-backend-0ir6.onrender.com";
 const connectionOptions = {
   "force new connection": true,
   reconnectionAttempts: "Infinity",
