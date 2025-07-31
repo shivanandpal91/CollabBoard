@@ -16,7 +16,7 @@ const { addUser, getUser, removeUser, getUsersInRoom } = require("./utils/users"
 
 // app.use(peerServer);
 var corsOptions = {
-  origin: ['http://localhost:5173', 'https://job-portal-frontendui.vercel.app'],
+  origin: ['http://localhost:5173', 'https://collab-board-front-ui.vercel.app/'],
   methods: "GET,POST,PUT,DELETE,OPTIONS",
   credentials:true,
   // optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
