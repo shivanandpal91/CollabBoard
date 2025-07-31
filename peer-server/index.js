@@ -32,9 +32,9 @@ const server = app.listen(process.env.PORT || 5001, () => {
 
 // Setup PeerJS
 const peerServer = ExpressPeerServer(server, {
-  path: "/peerjs",
+  path: "/",
   allow_discovery: true,
 });
 
 // Use peer middleware
-app.use("/peerjs", peerServer);
+app.use("/", peerServer);
