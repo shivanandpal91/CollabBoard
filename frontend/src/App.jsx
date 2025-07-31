@@ -250,11 +250,10 @@ return (
         element={
           <>
             <button
+              className="open-video-button"
               onClick={() => setOpenVideo(!openVideo)}
               style={{
                 position: "absolute",
-                top: "100px", // Moved lower to separate from "Leave"
-                right: "20px",
                 zIndex: "100",
                 backgroundColor: "#0B5ED7", // Bootstrap primary blue
                 color: "white",

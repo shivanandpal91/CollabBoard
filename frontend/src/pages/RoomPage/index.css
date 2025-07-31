@@ -1,4 +1,48 @@
 .canvas-box {
     height: 500px;
   }
-  
+  .floating-button {
+  position: absolute;
+  height: 40px;
+  width: 100px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.users-button {
+  top: 11%;
+  left: 1%;
+  background-color: #10b981;
+}
+
+.users-button:hover {
+  background-color: #059669;
+}
+
+.chat-button {
+  top: 17%;
+  left: 1%;
+  background-color: #3b82f6;
+}
+
+.chat-button:hover {
+  background-color: #2563eb;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .floating-button {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin: 10px auto;
+    display: block;
+    width: 50%;
+  }
+}

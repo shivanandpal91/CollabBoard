@@ -1,47 +1,18 @@
-// const RoomHeader = ({ user, onLeave }) => {
-//   return (
-//     <nav
-//       className="navbar navbar-expand-md w-100"
-//       style={{
-//         backgroundColor: "#55dc99ff",
-//         padding: "0.4rem 1rem",
-//         color: "white",
-//         fontSize: "1rem",
-//         fontWeight: 500,
-//         borderBottomLeftRadius: "30px",
-//         borderBottomRightRadius: "30px",
-//         boxShadow: "0 6px 12px rgba(0, 0, 0, 0.15)",
-//       }}
-//     >
-//       <div className="container-fluid">
-//         <div className="navbar-brand " style={{color: "#7b06c8ff"}}>
-//           Room_Id: {user?.roomId || "Unknown"}
-//         </div>
-
-//         <div className="d-flex ms-auto align-items-center">
-//           <span className="me-3" style={{color: "#7b06c8ff"}}>You: {user?.name || "N/A"}</span>
-//           <button
-//             className="btn btn-sm"
-//             style={{
-//               backgroundColor: "#a84625ff",
-//               color: "white",
-//               fontWeight: 500,
-//               borderRadius: "10px",
-//             }}
-//             onClick={onLeave}
-//           >
-//             Leave Room
-//           </button>
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// };
-
-// export default RoomHeader;
 
 import images from "../images.jpg"
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 const RoomHeader = ({ user, onLeave }) => {
+
+  //fixing bug of accessing roompage by providing any invalid roomID 
+   const navigate = useNavigate();
+  useEffect(() => {
+    if (!user?.name || !user?.roomId) {
+      alert("Invalid or missing details. Please join or create a room with Valid Details.");
+      navigate("/"); // Redirect to join page
+    }
+  }, [user]);
+  //////////////////////////////
   return (
     <nav
       className="navbar navbar-expand-md w-100"
@@ -94,7 +65,12 @@ const RoomHeader = ({ user, onLeave }) => {
               fontWeight: 500,
               borderRadius: "10px",
             }}
-            onClick={onLeave}
+            // onClick={onLeave}
+            onClick={() => {
+                if (window.confirm("Are you sure you want to leave the room?")) {
+                  onLeave();
+                }
+              }}
           >
             Leave Room
           </button>

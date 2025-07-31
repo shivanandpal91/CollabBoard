@@ -6,6 +6,7 @@ import Chat from "../../components/ChatBar";
 import RoomHeader from "../../components/Header/RoomHeader"; // adjust the path as per your project
 
 import { toast } from "react-toastify";
+  import { useLocation } from "react-router-dom";
 
 const RoomPage = ({
   user,
@@ -113,6 +114,23 @@ const RoomPage = ({
     });
   }, []);
 
+
+
+//for accidental refresh
+const location = useLocation();
+useEffect(() => {
+  const handleBeforeUnload = (e) => {
+    if (location.pathname !== "/") {
+      e.preventDefault();
+      e.returnValue = "";
+    }
+  };
+  window.addEventListener("beforeunload", handleBeforeUnload);
+  return () => {
+    window.removeEventListener("beforeunload", handleBeforeUnload);
+  };
+}, [location]);
+
   return (
     <>
       {/* <RoomHeader user={user} onLeave={() => (window.location.href = "/")} /> */}
@@ -122,25 +140,9 @@ const RoomPage = ({
       {/* <div style={{ height: "80px" }}></div> */}
       <div className="row">
         <div>
-
           <button
             type="button"
-            style={{
-              position: "absolute",
-              top: "11%",
-              left: "1%",
-              height: "40px",
-              width: "100px",
-              backgroundColor: "#10b981", // emerald-500
-              color: "#ffffff",
-              borderRadius: "8px",
-              fontWeight: "600",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-              border: "none",
-              cursor: "pointer",
-            }}
-            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#059669")} // emerald-600
-            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#10b981")}
+            className="floating-button users-button"
             onClick={() => setOpenedUserTab(true)}
           >
             Users
@@ -149,22 +151,7 @@ const RoomPage = ({
           {!showChat && (
             <button
               type="button"
-              style={{
-                position: "absolute",
-                top: "17%",
-                left: "1%",
-                height: "40px",
-                width: "100px",
-                backgroundColor: "#3b82f6", // blue-500
-                color: "#ffffff",
-                borderRadius: "8px",
-                fontWeight: "600",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                border: "none",
-                cursor: "pointer",
-              }}
-              onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#2563eb")} // blue-600
-              onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#3b82f6")}
+              className="floating-button chat-button"
               onClick={() => setShowChat(true)}
             >
               Chat
@@ -267,7 +254,7 @@ const RoomPage = ({
               ))}
             </div>
 
-            <div className="col-md-3 d-flex justify-content-center align-items-center gap-3">
+            <div className="col-md-3 d-flex justify-content-center align-items-center gap-1">
               <label htmlFor="color">Color:</label>
               <input
                 type="color"

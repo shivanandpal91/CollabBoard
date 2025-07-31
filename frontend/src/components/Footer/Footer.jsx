@@ -57,7 +57,7 @@ const About = () => {
             <div>
               <h2 style={{ fontSize: "24px", fontWeight: "600", marginBottom: "10px" }}>🧠 Tech Stack</h2>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", fontSize: "14px" }}>
-                {["React.js", "Tailwind CSS", "Socket.IO", "Node.js", "Express.js", "Canvas API"].map((tech, idx) => (
+                {["React.js", "Tailwind CSS", "Socket.IO", "Node.js", "Express.js", "Canvas API","WebRTC","Peerjs"].map((tech, idx) => (
                   <span key={idx} style={{ backgroundColor: "#374151", padding: "6px 14px", borderRadius: "9999px" }}>{tech}</span>
                 ))}
               </div>
