@@ -85,6 +85,9 @@ const RoomPage = ({
         p.innerText = user.name;
         div.append(p);
         const myVideo = document.createElement("video");
+        
+myVideo.muted = true; // ✅ Prevent echo from own audio
+
 
         addVideoStream(div, myVideo, stream);
 
