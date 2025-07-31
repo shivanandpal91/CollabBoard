@@ -19,7 +19,7 @@ const CreateRoomForm = ({ uuid, socket, setUser, setMyPeer }) => {
     //   secure: false,
     // });
     const myPeer = new Peer(undefined, {
-      host: "https://collabboard-a0su.onrender.com", // Your deployed domain
+      host: "collabboard-a0su.onrender.com", // Your deployed domain
       port: 443,           // HTTPS port
       path: "/",     // Use this if you used "--path /peerjs" when starting PeerServer
       secure: true,        // Must be true for HTTPS
