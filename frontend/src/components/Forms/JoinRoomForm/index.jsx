@@ -11,11 +11,17 @@ const JoinRoomForm = ({ uuid, socket, setUser, setMyPeer }) => {
   const handleRoomJoin = (e) => {
     e.preventDefault();
 
+    // const myPeer = new Peer(undefined, {
+    //   host: "/",
+    //   port: 5001,
+    //   path: "/",
+    //   secure: false,
+    // });
     const myPeer = new Peer(undefined, {
-      host: "/",
-      port: 5001,
-      path: "/",
-      secure: false,
+      host: "collabboard-a0su.onrender.com", // Your deployed domain
+      port: 443,           // HTTPS port
+      path: "/",     // Use this if you used "--path /peerjs" when starting PeerServer
+      secure: true,        // Must be true for HTTPS
     });
 
     setMyPeer(myPeer);

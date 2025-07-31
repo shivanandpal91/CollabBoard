@@ -10,31 +10,31 @@
 
 
 
-// const express = require("express");
-// const { ExpressPeerServer } = require("peer");
-// const cors = require("cors");
+const express = require("express");
+const { ExpressPeerServer } = require("peer");
+const cors = require("cors");
 
-// const app = express();
+const app = express();
 
-// // Enable CORS for your Vercel frontend
-// var corsOptions = {
-//   origin: ['http://localhost:5173', 'https://collab-board-front-ui.vercel.app/'],
-//   methods: "GET,POST,PUT,DELETE,OPTIONS",
-//   credentials:true,
-//   // optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// };
+// Enable CORS for your Vercel frontend
+var corsOptions = {
+  origin: ['http://localhost:5173', 'https://collab-board-front-ui.vercel.app/'],
+  methods: "GET,POST,PUT,DELETE,OPTIONS",
+  credentials:true,
+  // optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 
-// app.use(cors(corsOptions));
-// // Create HTTP server
-// const server = app.listen(process.env.PORT || 5001, () => {
-//   console.log("Peer server running on port", process.env.PORT || 5001);
-// });
+app.use(cors(corsOptions));
+// Create HTTP server
+const server = app.listen(process.env.PORT || 5001, () => {
+  console.log("Peer server running on port", process.env.PORT || 5001);
+});
 
-// // Setup PeerJS
-// const peerServer = ExpressPeerServer(server, {
-//   path: "/",
-//   allow_discovery: true,
-// });
+// Setup PeerJS
+const peerServer = ExpressPeerServer(server, {
+  path: "/",
+  allow_discovery: true,
+});
 
-// // Use peer middleware
-// app.use("/", peerServer);
+// Use peer middleware
+app.use("/", peerServer);
