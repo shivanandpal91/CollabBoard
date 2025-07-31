@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-
+const cors =require('cors');
 const server = require("http").createServer(app);
 const { Server } = require("socket.io");
 
@@ -15,7 +15,14 @@ const { addUser, getUser, removeUser, getUsersInRoom } = require("./utils/users"
 // });
 
 // app.use(peerServer);
+var corsOptions = {
+  origin: ['http://localhost:5173', 'https://job-portal-frontendui.vercel.app'],
+  methods: "GET,POST,PUT,DELETE,OPTIONS",
+  credentials:true,
+  // optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 
+app.use(cors(corsOptions));
 const io = new Server(server);
 // server.on("upgrade", (request, socket, head) => {});
 
