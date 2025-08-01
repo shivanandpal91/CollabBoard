@@ -43,7 +43,7 @@ const RoomHeader = ({ user, onLeave }) => {
               fontWeight: 600,
             }}
           >
-            CollabBoard
+            ChitraBoard
           </span>
         </div>
 

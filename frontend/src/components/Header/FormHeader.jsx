@@ -24,7 +24,7 @@ const FormHeader = () => {
             letterSpacing: "1px",
           }}
         >
-          CollabBoard
+          ChitraBoard
         </span>
       </div>
     </nav>
