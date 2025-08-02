@@ -6,11 +6,15 @@ import Peer from "peerjs";
 const CreateRoomForm = ({ uuid, socket, setUser, setMyPeer }) => {
   const [roomId, setRoomId] = useState(uuid());
   const [name, setName] = useState("");
-
+  const [creating, setCreating] = useState(false); // prevent multiple clicks
   const navigate = useNavigate();
 
   const handleCreateRoom = (e) => {
     e.preventDefault();
+    
+    if (creating || !name) return;
+
+    setCreating(true); // lock button
 
     // const myPeer = new Peer(undefined, {
     //   host: "/",
