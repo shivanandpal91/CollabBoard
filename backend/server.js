@@ -33,9 +33,9 @@ app.get("/", (req, res) => {
   );
 });
 
-let roomIdGlobal, imgURLGlobal;
-
+const canvasImg={};
 io.on("connection", (socket) => {
+  let roomIdGlobal;
   socket.on("userJoined", (data) => {
     const { name, userId, roomId, host, presenter } = data;
     roomIdGlobal = roomId;
@@ -53,18 +53,18 @@ io.on("connection", (socket) => {
     // console.log(111);
     socket.broadcast.to(roomId).emit("allUsers", users);
     setTimeout(() => {
-      socket.emit("whiteBoardDataResponse", { imgURL: imgURLGlobal });
+      socket.emit("whiteBoardDataResponse", { imgURL: canvasImg[roomIdGlobal] });
       socket.broadcast
         .to(roomId)
         .emit("userJoinedMessageBroadcasted", { name, userId, users });
       socket.broadcast.to(roomId).emit("whiteBoardDataResponse", {
-        imgURL: imgURLGlobal,
+        imgURL: canvasImg[roomIdGlobal],
       });
     }, 1000);
   });
 
   socket.on("whiteboardData", (data) => {
-    imgURLGlobal = data;
+    canvasImg[roomIdGlobal] = data;
     socket.broadcast.to(roomIdGlobal).emit("whiteBoardDataResponse", {
       imgURL: data,
     });
