@@ -5,12 +5,15 @@ import Peer from "peerjs";
 const JoinRoomForm = ({ uuid, socket, setUser, setMyPeer }) => {
   const [roomId, setRoomId] = useState("");
   const [name, setName] = useState("");
-
+  const [joining, setJoining] = useState(false);  // <-- new state flag
   const navigate = useNavigate();
 
   const handleRoomJoin = (e) => {
     e.preventDefault();
-
+    
+    if (joining || !roomId || !name) return;  // prevent double join or empty inputs
+    setJoining(true); // disable button immediately
+    
     // const myPeer = new Peer(undefined, {
     //   host: "/",
     //   port: 5001,
