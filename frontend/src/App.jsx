@@ -277,6 +277,9 @@ return (
               style={{
                 zIndex: 1000,
                 right: openVideo ? "0" : "-100%",
+                overflowY: "auto",     // Enables vertical scrolling
+                overflowX: "hidden",   // Prevents horizontal scroll (optional)
+                maxHeight: "100vh",    // Ensures it doesn’t go beyond the screen height
               }}
               ref={videoGrid}
             >
