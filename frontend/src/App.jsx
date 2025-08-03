@@ -111,10 +111,19 @@ const App = () => {
       toast.info(`${data.name} left the room`);
 
       // Close peer connection if exists
-      if (peers[data.userId]) {
-        peers[data.userId].close();
-        delete peers[data.userId];
-      }
+      // if (peers[data.userId]) {
+      //   peers[data.userId].close();
+      //   delete peers[data.userId];
+      // }
+      setPeers(prev => {//this is changed********************
+        if (prev[data.userId]) {
+            prev[data.userId].close();
+            const newPeers = { ...prev };
+            delete newPeers[data.userId];
+            return newPeers;
+          }
+        return prev;
+      });
 
       // Explicit DOM cleanup (in case call.on('close') missed it)
       const videoDiv = document.getElementById(data.userId);
